@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div class="navContainer">
+            <ul id="navList">
+                <li class="navItem"><a href="/dashboard" class="navLink">CLUBS</a></li>
+                <li class="navItem"><a href="/clubmembers" class="navlik">MEMBERS</a></li>
+                <li class="navItem"><a href="/updateprofile" class="navLink">PROFILE</a></li>
+                <li class="navItem"><a href="/logout" class="navLink">LOGOUT</a></li>
+            </ul>
+            <div id="picContainer"><img src="{{ userDisplayablePic }}" alt="votre photo de profil" width="50px"
+                    height="50px"></div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <h1>Bienvenue {{ user.firstname }} ici gérez tous vos clubs</h1>
+        {% if success %}
+        <h2 id="successMessagePassword"> {{ success }} </h2>
+        {% endif %}
+        <h2 id="errorExistingClub"> {{ errorMessage }} </h2>
+        <div class="formContainer">
+            <form action="/addclub" method="post" enctype="multipart/form-data">
+                <input type="text" name="clubName" id="clubName" class="formField" placeholder="Nom du club"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubAdress1" id="clubAdress1" class="formField" placeholder="Adresse 1"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubAdress2" id="clubAdress2" class="formField" placeholder="Adresse 2"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubPostalCode" id="clubPostalCode" class="formField" placeholder="Code postal"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubCity" id="clubCity" class="formField" placeholder="Ville"
+                    style="font-family: Roboto, sans-serif;">
+                <label for="fileRegister">
+                    <input type="file" name="picture" id="fileRegister" class="formField" placeholder="Upload picture"
+                        style="font-family: Roboto, sans-serif;">
+                    <span>Ajouter image</span>
+                </label>
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">Ajouter un club</button>
+            </form>
+        </div>
+        <div id="mainContainer">
+            {# si l'utilisateur possède un club dans clubCollection #}
+            {% if user.clubCollection|length > 0 %}
+            {# si l'utilisateur possède des clubs dans clubCollection nous les affichons sur la page #}
+            <div id="clubContainer">
+                {% for club in user.clubCollection %}
+                <div class="clubCard">
+                    <div class="clubPicContainer">
+                        <img src="{{ club.clubPicture }}" alt="image du club" width="50px">
+                    </div>
+                    <h2>{{ club.clubName }}</h2>
+                    {# Pour modifier les informations du club #}
+                    <form action="/updateclub" method="get">
+                        <input type="hidden" name="clubId" value="{{ club._id }}">
+                        <button type="submit" class="clubButton" style="font-family: Roboto, sans-serif;">Modifier
+                            le club</button>
+                    </form>
+                    {# Pour supprimer le club #}
+                    <form action="/deleteclub" method="get">
+                        <input type="hidden" name="clubId" value="{{ club._id }}">
+                        <button type="submit" class="clubButton" style="font-family: Roboto, sans-serif;">Supprimer le
+                            club</button>
+                    </form>
+                    <form action="/manageclubs" method="get">
+                        <input type="hidden" name="clubId" value="{{ club._id }}">
+                        <button type="submit" class="clubButton" style="font-family: Roboto, sans-serif;">Gérer les équipes du club</button>
+                    </form>
+                    <form action="/addmember" method="get">
+                        <input type="hidden" name="clubId" value="{{ club._id }}">
+                        <button type="submit" class="clubButton" style="font-family: Roboto, sans-serif;">Ajouter un
+                            membre au club</button>
+                    </form>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h1>il semble que vous n'ayez aucun club, remplissez le formulaire ci dessus pour en créer un !
+                </h1>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="footerContainer">
+            <p>© 2024 Easy Club Manager</p>
+        </div>
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+</body>
+
+</html>

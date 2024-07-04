@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/update_member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Update member</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div class="navContainer">
+            <ul id="navList">
+                <li class="navItem"><a href="/dashboard" class="navLink">CLUBS</a></li>
+                {# <li class="navItem"><a href="/clubManagement" class="navLInk">Club</a></li> #}
+                <li class="navItem"><a href="/updateprofile" class="navLink">PROFILE</a></li>
+                <li class="navItem"><a href="/logout" class="navLink">LOGOUT</a></li>
+                <li class="navItem"><a href="/deleteuser" class="navLink">QUIT</a></li>
+            </ul>
+            <div id="picContainer"><img src="{{ userDisplayablePic }}" alt="votre photo de profil" width="50px"
+                    height="50px"></div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <div id="speechContainer">
+            <h1>Mise à jour du membre {{ member.memberFirstname }} </h1>
+            {# Nous affichons les erreurs ici #}
+            {% if error is defined and error is not empty %}
+            <div class="errorMsg">
+                {% for errorMessage in error %}
+                <p>{{ errorMessage }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="formContainer">
+            <img src="img/update_member/update_member_window.png" alt="formulaire de mise à jour du membre">
+            <form action="/updatemember" method="post" enctype="multipart/form-data">
+                <input type="text" name="memberFirstname" id="memberFirstnameRegister" class="formField" {% if (member.memberFirstname) %}
+                    value="{{member.memberFirstname}}" {% else %} placeholder="Prénom" {% endif %}
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="memberName" id="memberNameRegister" class="formField" {% if (member.memberName) %}
+                    value="{{member.memberName}}" {% else %} placeholder="Nom" {% endif %}
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="memberBirthdate" id="memberBirthdateRegister" class="formField" {% if (member.memberBirthdate) %}
+                    value="{{member.memberBirthdate}}" {% else %} placeholder="Date de naissance" {% endif %}
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="memberPhone" id="memberPhoneRegister" class="formField" {% if (member.memberPhone) %}
+                    value="{{member.memberPhone}}" {% else %} placeholder="Téléphone" {% endif %}
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="memberRole" id="memberRoleRegister" class="formField" {% if (member.memberRole) %}
+                    value="{{member.memberRole}}" {% else %} placeholder="Role" {% endif %}
+                    style="font-family: Roboto, sans-serif;">
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">ENREGISTRER</button>
+                <label for="fileRegister">
+                    <input type="file" name="picture" id="fileRegister" class="formField" placeholder="Upload picture"
+                        style="font-family: Roboto, sans-serif;">
+                    <span>AJOUTER IMAGE</span>
+                </label>
+                <input type="text" name="memberId" id="memberId" class="hidden" value="{{ member._id }}">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div id="footerContainer">
+            <p>© 2024 Easy Club Manager</p>
+        </div>
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

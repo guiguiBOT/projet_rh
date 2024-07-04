@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: solid 2px #d36300;
+    background-color: #1e1e1e;
+    overflow:hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+
+.logoContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#loadingLogo {
+    width: 600px;
+}
+
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.loaderItems {
+    width: 16px;
+    height: 9px;
+    border: 1px solid #d36300;
+}
+
+#loaderItem1 {
+    animation: loader 1s infinite;
+}
+
+#loaderItem2 {
+    animation: loader 1s infinite 0.1s;
+}
+
+#loaderItem3 {
+    animation: loader 1s infinite 0.20s;
+}
+
+#loaderItem4 {
+    animation: loader 1s infinite 0.30s;
+}
+
+#loaderItem5 {
+    animation: loader 1s infinite 0.40s;
+}
+
+#loaderItem6 {
+    animation: loader 1s infinite 0.50s;
+}
+
+#loaderItem7 {
+    animation: loader 1s infinite 0.60s;
+}
+
+#loaderItem8 {
+    animation: loader 1s infinite 1.70s;
+}
+
+#loaderItem9 {
+    animation: loader 1s infinite 1.80s;
+}
+
+#loaderItem10 {
+    animation: loader 1s infinite 1.90s;
+}
+
+/* ANIMATION LOADER */
+@keyframes loader {
+    0% {
+        background-color: #d36300;
+        border: 1px solid #f3f3f3;
+    }
+
+    70% {
+        background-color: #1e1e1e;
+    }
+    
+    99% {
+        background-color: #1e1e1e;
+    }
+
+    100% {
+        background-color: #d36300;
+    }
+}
+
+/* ANIMATION FADE OUT */
+.fade-out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    animation: smooth 0.3s 3.8s 
+}
+
+@keyframes smooth {
+    0% {
+        background-color: #000000;
+        opacity: 0;
+    }
+
+    75% {
+        background-color: #000000;
+        opacity: 1;
+    }
+
+    100% {
+        background-color: #000000;
+        opacity: 1;
+    }
+}
+
+
+/* RESPONSIVE */
+@media screen and (max-width: 1024px) {
+    #loadingLogo {
+        width: 400px;
+    }
+
+    .loaderItems {
+        width: 12px;
+        height: 7px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #loadingLogo {
+        width: 300px;
+    }
+
+    .loaderItems {
+        width: 8px;
+        height: 5px;
+    }
+
+    .loaderContainer {
+        gap: 4px;
+    }
+
+    .logoContainer {
+        gap: 5px;
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/t_management.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Team management</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div class="navContainer">
+            <ul id="navList">
+                <li class="navItem"><a href="/dashboard" class="navLink">CLUBS</a></li>
+                <li class="navItem"><a href="/agenda" class="navLink">AGENDA</a></li>
+                <li class="navItem"><a href="/updateprofile" class="navLink">PROFILE</a></li>
+                <li class="navItem"><a href="/logout" class="navLink">LOGOUT</a></li>
+            </ul>
+            <div id="picContainer"><img src="{{ userDisplayablePic }}" alt="votre photo de profil" width="50px"
+                    height="50px"></div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <h1>Bienvenue {{ user.firstname }} ici gérez les membres de l'équipe {{ team.teamName }}</h1>
+        {# Nous affichons les erreurs ici #}
+        {% if error is defined and error is not empty %}
+        <div class="errorMsg">
+            {% for errorMessage in error %}
+            <p>{{ errorMessage }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="formContainer">
+            {# TODO: configurer la route pour mettre à jour la base de données en insérant l'id du membre sélectionné à
+            la member collection de la team #}
+            <form action="/memberselectteam" method="post">
+                <select name="selectedMember" id="selectedMember">
+                    {% for member in clubMembersInArray %}
+                    <option value="{{ member.memberId }}">{{ member.memberFirstname }} {{ member.memberName }} : {{
+                        member.memberEmail }} </option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="clubId" id="clubId" class="hidden" value="{{ club._id }}">
+                <input type="text" name="teamId" id="teamId" class="hidden" value="{{ team._id }}">
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">Sélectionner un membre</button>
+            </form>
+        </div>
+        {% if errorNoMembersInClub is defined %}
+        <div class="errorMsg">
+            <p>{{ errorNoMembersInClub }}</p>
+        </div>
+        {% endif %}
+        <h2 id="errorExistingMember"> {{ errorMessage }} </h2>
+        <div id="mainContainer">
+            {# si l'équipe possède déjà un membre dans memberCollection #}
+            {% if team.memberCollection|length > 0 %}
+            {# si l'équipe possède des membres dans memberCollection nous les affichons sur la page #}
+            <div id="memberContainer">
+                {% for member in team.memberCollection %}
+                <div class="memberCard">
+                    <div class="memberPicContainer">
+                        <img src="{{ member.memberPicture }}" alt="image du membre" width="50px">
+                    </div>
+                    <h2> {{ member.memberFirstname }} {{ member.memberName }}</h2>
+                    {# <form action="/managemember" method="get">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <input type="hidden" name="memberId" value="{{ member._id }}">
+                        <button type="submit" class="memberButton" style="font-family: Roboto, sans-serif;">Gérer
+                            le membre</button>
+                    </form> #}
+                    {# Pour modifier les informations du membre #}
+                    <form action="/updatemember" method="get">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <input type="hidden" name="memberId" value="{{ member._id }}">
+                        <button type="submit" class="memberButton" style="font-family: Roboto, sans-serif;">Modifier le
+                            membre</button>
+                    </form>
+                    {# Pour supprimer le membre #}
+                    <form action="/withdrawmember" method="post">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <input type="hidden" name="memberId" value="{{ member._id }}">
+                        <button type="submit" class="memberButton" style="font-family: Roboto, sans-serif;">Retirer le membre de l'équipe</button>
+                    </form>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>
+                    il semble que que cette équipe ne possède pas de membre, Sélectionnez-en un dans la liste des
+                    membres du club
+                </p>
+                {% endif %}
+            </div>
+    </main>
+    <footer>
+        <div id="footerContainer">
+            <p>© 2024 Easy Club Manager</p>
+        </div>
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+</body>

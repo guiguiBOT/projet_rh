@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    min-height: 325px;
+    margin: 0;
+    padding: 0;
+    border: solid 2px #d36300;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-image: url("../img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+#logoContainer {
+    height: 50px;
+    padding: 0 0 0 50px;
+}
+
+#logoContainer img {
+    padding-top: 0;
+}
+
+#picContainer {
+    width: 50px;
+    height: 50px;
+    margin: 0 40px 0 10px;
+    padding-top: 5px;
+}
+
+#picContainer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #d36300;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#mainContainer {
+    margin-top: 25px;
+    width: 100%;
+    height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 1em;
+    color: #c4c4c4;
+}
+
+.preventMsg {
+    font-size: 1em;
+    color: #d36300;
+}
+
+h1 {
+    color: #d36300;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#errorExistingClub {
+    font-size: 1em;
+    color: #d36300;
+    animation: fadeInOut2 2s infinite;
+}
+
+#successMessagePassword {
+    font-size: 1em;
+    color: #d36300;
+    animation: fadeInOut 3s forwards;
+}
+
+/* Personnalisation de la barre de défilement */
+#mainContainer::-webkit-scrollbar {
+    width: 10px;
+    /* Largeur de la barre de défilement */
+}
+
+#mainContainer::-webkit-scrollbar-track {
+    background: rgb(26, 26, 26);
+    /* Couleur de fond de la piste de défilement */
+}
+
+#mainContainer::-webkit-scrollbar-thumb {
+    background: rgb(77, 77, 77);
+    /* Couleur de la barre de défilement */
+}
+
+#mainContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Couleur de la barre de défilement au survol */
+}
+
+.formButton {
+    padding: 5px;
+    background-color: rgb(30, 30, 30, 0.21);
+    border: 1px solid #d36300;
+    border-radius: 5px;
+    color: #c4c4c4;
+    cursor: pointer;
+    font-size: 0.8em;
+    letter-spacing: 0.2ch;
+}
+
+.formButton:hover {
+    background-color: #c4c4c4;
+    color: #000000;
+}
+
+
+header {
+    display: flex;
+    width: 100%;
+    padding-top: 30px;
+}
+
+#navList {
+    list-style-type: none;
+    display: flex;
+    padding: 0 0 10px 50px;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+.navItem {
+    margin: 0 20px;
+}
+
+.navItem a {
+    color: #c4c4c4;
+    text-decoration: none;
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+
+.navItem a:hover {
+    color: #d36300;
+    transform: scale(1.1);
+}
+
+input {
+    outline: none;
+}
+
+input:hover {
+    border: 1px solid #d36300;
+}
+
+
+.formField {
+    background-color: rgb(243, 243, 243, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgb(248, 248, 248, 0.13);
+    color: #d36300;
+    letter-spacing: 0.2ch;
+    padding: 5px;
+    font-size: 0.8em;
+}
+
+::placeholder {
+    color: rgba(167, 167, 167, 0.5);
+}
+
+label span {
+    cursor: pointer;
+    background-color: rgb(243, 243, 243, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgb(248, 248, 248, 0.13);
+    color: #d36300;
+    letter-spacing: 0.2ch;
+    padding: 5px;
+    font-size: 0.8em;
+}
+
+label span:hover {
+    background-color: #c4c4c4;
+    border: 1px solid #d36300;
+}
+
+#fileRegister {
+    display: none;
+}
+
+#clubContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.memberCard {
+    width: 50%;
+    background-color: rgba(30, 30, 30, 0.918);
+    background-image: url("../img/dashboard/clubcard.png");
+    background-size: cover;
+    border-radius: 5px;
+    color: #c4c4c4;
+    display: flex;
+    flex-direction: raw;
+    justify-content: start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.clubCard a {
+    color: #c4c4c4;
+    text-decoration: none;
+    font-size: 1em;
+    letter-spacing: 0.2ch;
+}
+
+.clubCard a:hover {
+    color: #d36300;
+    transition: 0.1s;
+}
+
+.memberCard h2 {
+    font-size: 1em;
+    margin: 0 10px 0 15px
+}
+
+.memberButton {
+    margin: 0 10px;
+    padding: 5px;
+    background-color: rgb(30, 30, 30, 0.21);
+    border: 1px solid #d36300;
+    border-radius: 5px;
+    color: #c4c4c4;
+    cursor: pointer;
+    font-size: 0.8em;
+    letter-spacing: 0.2ch;
+}
+
+.memberButton:hover {
+    background-color: #c4c4c4;
+    color: #000000;
+}
+
+.memberPicContainer {
+    height: 50px;
+    border-radius: 5%;
+    margin: 5px 15px 5px 0;
+    border: 1px solid #d36300;
+    margin: 10px 0 10px 30px;
+}
+
+.memberPicContainer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5%;
+}
+
+#footerContainer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(30, 30, 30, 0.918);
+    color: #c4c4c4;
+    font-size: 0.8em;
+    letter-spacing: 0.2ch;
+    margin-top: 15px;
+}
+
+/* ANIMATION FADE IN */
+.fade-in {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    animation: smooth 0.3s;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInOut2 {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 1244px) {
+    .navContainer {
+        font-size: 1.2em;
+    
+    }
+
+    #logoContainer img {
+        width: 350px;
+    }
+
+    #navList {
+        padding: 0 0 10px 25px;
+    }
+
+    #picContainer {
+        padding: 0px;
+    }
+} 
+
+@media screen and (max-width: 1092px) {
+    #logoContainer img {
+        width: 300px;
+    }
+
+    #navList {
+        padding: 0 0 20px 25px;
+    }
+
+    .formField {
+        font-size: 0.7em;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #logoContainer img {
+        width: 250px;
+    }
+
+    #navList {
+        padding: 0 0 25px 25px;
+    }
+
+    .formField {
+        font-size: 0.7em;
+    }
+}

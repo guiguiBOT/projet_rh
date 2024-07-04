@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/loading.css">
+    <title>Loading page</title>
+</head>
+
+<body>
+    <div class="fade-out"></div>
+    <header>
+        <h1 class="hidden">easy club manager l'application de gestion de club sportif</h1>
+    </header>
+    <main>
+        <div class="animationContainer">
+            <div class="logoContainer"><img src="img/loading/wideLogo.webp" id="loadingLogo" alt="image du logo easy club manager">
+                <div class="loaderContainer">
+                    <span id="loaderItem1" class="loaderItems"></span>
+                    <span id="loaderItem2" class="loaderItems"></span>
+                    <span id="loaderItem3" class="loaderItems"></span>
+                    <span id="loaderItem4" class="loaderItems"></span>
+                    <span id="loaderItem5" class="loaderItems"></span>
+                    <span id="loaderItem6" class="loaderItems"></span>
+                    <span id="loaderItem7" class="loaderItems"></span>
+                    <span id="loaderItem8" class="loaderItems"></span>
+                    <span id="loaderItem9" class="loaderItems"></span>
+                    <span id="loaderItem10" class="loaderItems"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "/login";
+            }, 4000); // Redirige vers la route /login après 4 secondes
+        }
+    </script>
+</body>
+
+</html>

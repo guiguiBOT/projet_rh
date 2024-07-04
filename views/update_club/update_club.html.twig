@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/update_club.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Update club</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div class="navContainer">
+            <ul id="navList">
+                <li class="navItem"><a href="/dashboard" class="navLink">CLUBS</a></li>
+                <li class="navItem"><a href="/updateprofile" class="navLink">PROFILE</a></li>
+                <li class="navItem"><a href="/logout" class="navLink">LOGOUT</a></li>
+            </ul>
+            <div id="picContainer"><img src="{{ userDisplayablePic }}" alt="votre photo de profil" width="50px" height="50px"></div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <div id="speechContainer">
+            <h1>Modifier les information du club {{ club.clubName }} </h1>
+            {# Nous affichons les erreurs ici #}
+            {% if error %}
+            {% for errors in error %}
+            <p class="errorMsg">{{ errors }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="formContainer">
+            <img src="img/update_club/update_club_window.png" alt="formulaire de mise à jour du profil">
+            <form action="/updateclub" method="post" enctype="multipart/form-data">
+                <input type="text" name="clubName" id="clubName" class="formField" 
+                {% if (club.clubName) %} value="{{club.clubName}}" {% else %} placeholder="Club name" {% endif %} style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubAdress1" id="clubAdress1" class="formField" 
+                {% if (club.clubAdress1) %} value="{{club.clubAdress1}}" {% else %} placeholder="Adress 1" {% endif %} style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubAdress2" id="clubAdress2" class="formField" 
+                {% if (club.clubAdress2) %} value="{{club.clubAdress2}}" {% else %} placeholder="Adress 2" {% endif %} style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubPostalCode" id="clubPostalCode" class="formField" 
+                {% if (club.clubPostalCode) %} value="{{club.clubPostalCode}}" {% else %} placeholder="Postal code" {% endif %} style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubCity" id="clubCity" class="formField" 
+                {% if (club.clubCity) %} value="{{club.clubCity}}" {% else %} placeholder="City" {% endif %} style="font-family: Roboto, sans-serif;">
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">ENREGISTRER</button>
+                <label for="fileRegister">
+                    <input type="file" name="picture" id="fileRegister" class="formField" placeholder="Upload picture"
+                        style="font-family: Roboto, sans-serif;">
+                    <span>AJOUTER IMAGE</span>
+                </label>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div id="footerContainer">
+            <p>© 2024 Easy Club Manager</p>
+        </div>
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+</body>
+
+</html>

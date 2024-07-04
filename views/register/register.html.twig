@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+    </header>
+    <main>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div id="speechContainer">
+            <h1>Inscrivez-vous afin de pouvoir créer votre club</h1>
+            {# Nous affichons les erreurs ici #}
+            {% if error is defined and error is not empty %}
+            <div class="errorMsg">
+                {% for errorMessage in error %}
+                <p>{{ errorMessage }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="formContainer">
+            <img src="img/register/register_window.png" alt="formulaire d'inscription" width="400px">
+            <form action="/adduser" method="post" enctype="multipart/form-data">
+                <input type="text" name="firstname" id="firstNameRegister" class="formField" placeholder="Prénom"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="email" id="emailRegister" class="formField" placeholder="Email"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="password" name="password" id="passwordRegister" class="formField" placeholder="Password"
+                    style="font-family: Roboto, sans-serif;">
+                <span id="interrogation">?</span>
+                <p id="pwdMsgBox">Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un
+                    caractère spécial</p>
+                <input type="password" name="passwordConfirm" id="passwordCheckRegister" class="formField"
+                    placeholder="Confirmer password" style="font-family: Roboto, sans-serif;">
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">S'ENREGISTRER</button>
+            </form>
+            <a href="/login" id="linkLogin" class="formLink">Déjà inscrit ?</a>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+
+            }, 300); // Sort la div du fade in du flux au bout de 0.8s
+        }
+    </script>
+</body>
+
+</html>

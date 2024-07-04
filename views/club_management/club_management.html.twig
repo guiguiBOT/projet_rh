@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/c_management.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>club management</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" alt="image du logo easy club manager" width="400px">
+        </div>
+        <div class="navContainer">
+            <ul id="navList">
+                <li class="navItem"><a href="/dashboard" class="navLink">CLUBS</a></li>
+                <li class="navItem"><a href="/updateprofile" class="navLink">PROFILE</a></li>
+                <li class="navItem"><a href="/logout" class="navLink">LOGOUT</a></li>
+            </ul>
+            <div id="picContainer"><img src="{{ userDisplayablePic }}" alt="votre photo de profil" width="50px"
+                    height="50px"></div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <h1>Bienvenue {{ user.firstname }} Gérez ici les équipes du club {{ club.clubName }}</h1>
+        <div class="formContainer">
+            <form action="/addteam" method="post" enctype="multipart/form-data">
+                <input type="text" name="teamName" id="teamName" class="formField" placeholder="Nom de l'équipe"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="teamSport" id="teamSport" class="formField" placeholder="Discipline sportive"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="teamLevel" id="teamLevel" class="formField" placeholder="Catégorie"
+                    style="font-family: Roboto, sans-serif;">
+                <input type="text" name="clubId" id="clubId" class="hidden" value="{{ club._id }}">
+                <select name="teamCoach" id="teamCoach" class="formField" style="font-family: Roboto, sans-serif;">
+                    {% for member in clubMembers %}
+                    <option value="{{ member._id }}">{{ member.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="fileRegister">
+                    <input type="file" name="picture" id="fileRegister" class="formField" placeholder="Upload picture"
+                        style="font-family: Roboto, sans-serif;">
+                    <span>Upload picture</span>
+                </label>
+                <button type="submit" id="btnRegister" class="formButton"
+                    style="font-family: Roboto, sans-serif;">Ajouter une équipe</button>
+            </form>
+        </div>
+        <h2 id="errorExistingTeam"> {{ errorMessage }} </h2>
+        <div id="mainContainer">
+            {# si le club possède une équipe dans teamCollection #}
+            {% if club.teamCollection|length > 0 %}
+            {# si le club possède des équipe dans teamCollection nous les affichons sur la page #}
+            <div id="teamContainer">
+                {% for team in club.teamCollection %}
+                <div class="teamCard">
+                    <div class="teamPicContainer">
+                        <img src="{{ team.teamPicture }}" alt="image du club" width="50px">
+                    </div>
+                    <h2>{{ team.teamName }}</h2>
+                    {# <p>{{ club.clubAdress1 }}</p>
+                    <p>{{ club.clubAdress2 }}</p>
+                    <p>{{ club.clubPostalCode }}</p>
+                    <p>{{ club.clubCity }}</p> #}
+                    {# Pour modifier les informations de l'équipe #}
+                    <form action="/updateteam" method="get">
+                        <input type="hidden" name="clubId" value="{{ club._id }}">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <button type="submit" class="teamButton" style="font-family: Roboto, sans-serif;">Modifier
+                            l'équipe</button>
+                    </form>
+                    {# Pour supprimer la team #}
+                    <form action="/deleteteam" method="get">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <button type="submit" class="teamButton" style="font-family: Roboto, sans-serif;">Supprimer
+                            l'équipe</button>
+                    </form>
+                    <form action="/manageteam" method="get">
+                        <input type="hidden" name="teamId" value="{{ team._id }}">
+                        <button type="submit" class="teamButton" style="font-family: Roboto, sans-serif;">Ajouter ou supprimer un membre à l'équipe</button>
+                    </form>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h1>il semble que que ce club ne possède pas d'équipe, créez-en une à l'aide du formulaire ci-dessus !
+                </h1>
+                {% endif %}
+            </div>
+    </main>
+    <footer>
+        <div id="footerContainer">
+            <p>© 2024 Easy Club Manager</p>
+        </div>
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+</body>

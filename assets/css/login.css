@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 325px;
+    margin: 0;
+    padding: 0;
+    border: solid 2px #d36300;
+    background-color: #000000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-image: url("../img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+#speechContainer {
+    width: 50%;
+    position: absolute;
+    top: 20%;
+    left: 26%;
+    text-align: center;
+    font-size: 1em;
+    color: #c4c4c4;
+}
+
+#logoContainer {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+}
+
+#logoContainer img {
+    width: 400px;
+}
+
+
+input {
+    outline: none;
+}
+
+input:hover {
+    border: 1px solid #d36300;
+}
+
+
+.formField {
+    background-color: rgb(243, 243, 243, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgb(248, 248, 248, 0.13);
+    color: #d36300;
+    letter-spacing: 0.2ch;
+    padding: 5px;
+    font-size: 0.8em;
+}
+
+::placeholder {
+    color: rgba(167, 167, 167, 0.5);
+}
+
+.formButton {
+    padding: 5px;
+    background-color: rgb(30, 30, 30, 0.21);
+    border: 1px solid #d36300;
+    border-radius: 5px;
+    color: #c4c4c4;
+    cursor: pointer;
+    font-size: 0.8em;
+    letter-spacing: 0.2ch;
+}
+
+.formLink {
+    color: #d36300;
+}
+
+.formLink:hover {
+    color: #c4c4c4;
+}
+
+.formContainer {
+    position: relative;
+}
+
+.errorMsg {
+    position: absolute;
+    font-size: 0.8em;
+    top: 31%;
+    left: 61%;
+    color: #d36300;
+    animation: fadeInOut 1s infinite;
+}
+
+#emailLogin {
+    position: absolute;
+    top: 18%;
+    left: 14%;
+}
+
+#passwordLogin {
+    position: absolute;
+    top: 39%;
+    left: 14%;
+}
+
+#btnLogin {
+    position: absolute;
+    top: 66%;
+    left: 14%;
+    padding: 7px 30px;
+    font-size: small;
+}
+
+#btnLogin:hover {
+    color: #d36300;
+    background-color: rgb(196, 196, 196);
+}
+
+#linkRegister {
+    position: absolute;
+    top: 69.5%;
+    left: 61%;
+    font-size: small;
+}
+
+/* ANIMATION FADE IN */
+.fade-in {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    animation: smooth 0.3s;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes smooth {
+    0% {
+        background-color: #000000;
+        opacity: 1;
+    }
+
+    100% {
+        background-color: #000000;
+        opacity: 0;
+    }
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 1024px) {
+    #speechContainer {
+        width: 60%;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        text-align: center;
+        font-size: 0.7em;
+    }
+} 
+
+@media screen and (max-width: 768px) {
+    #speechContainer {
+        font-size: 0.8em;
+    }
+}

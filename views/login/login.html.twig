@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="fade-in"></div>
+    <header>
+        </div>
+        <div id="speechContainer">
+            <h1>ECM une application simple pour gérer votre club sportif inscrivez-vous, créez votre club et laissez
+                vous guider</h1>
+        </div>
+    </header>
+    <main>
+        <div id="logoContainer">
+            <img src="img/login/logo.png" id="logo" alt="image du logo easy club manager">
+        </div>
+        <div class="formContainer">
+            {% if error is defined and error is not empty %}
+            <div class="errorMsg">
+                {% for errorMessage in error %}
+                <p>{{ errorMessage }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <img src="img/login/login_window.png" alt="formulaire de login" width="400px">
+            <form action="/logincheck" method="post">
+                <input type="text" name="emailLogin" id="emailLogin" class="formField" placeholder="Email"
+                    style="font-family: Roboto, sans-serif;">
+                {% if error.emailError %}
+                <span id="errorLoginEmail">
+                    <p> {{ error.emailError }} </p>
+                </span>
+                {% endif %}
+                <input type="password" name="passwordLogin" id="passwordLogin" class="formField" placeholder="Password"
+                    style="font-family: Roboto, sans-serif;">
+                {% if error.passwordError %}
+                <span id="errorLoginPassword">
+                    <p> {{ error.passwordError }} </p>
+                </span>
+                {% endif %}
+                <button type="submit" id="btnLogin" class="formButton"
+                    style="font-family: Roboto, sans-serif;">S'IDENTIFIER</button>
+            </form>
+            <a href="/register" id="linkRegister" class="formLink">Pas encore inscrit ?</a>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.querySelector('.fade-in').classList.add('hidden');
+
+            }, 300); // Sort la div du fade in du flux au bout de 0.3s
+        }
+    </script>
+</body>
+
+</html>
