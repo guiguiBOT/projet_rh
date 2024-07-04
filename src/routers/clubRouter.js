@@ -11,7 +11,7 @@ clubRouter.post('/addclub', upload.single('picture'), authguard, async (req, res
     const user = await userModel.findOne({ _id: req.session.userId })
     try {
         // On vérifie si le club existe déjà dans la base de données
-        let club = await clubModel.findOne({ clubName: req.body.clubName, userId: req.session.userId})
+        let club = await clubModel.findOne({ clubName: req.body.clubName, userId: req.session.userId })
         if (club) {
             throw { clubError: "Ce club existe déjà" }
         } else {
@@ -31,8 +31,8 @@ clubRouter.post('/addclub', upload.single('picture'), authguard, async (req, res
         }
     } catch (e) {
         console.log(e);
-        req.session.errorMessage = 
-        res.redirect('/dashboard')
+        req.session.errorMessage =
+            res.redirect('/dashboard')
     }
 })
 
@@ -60,14 +60,21 @@ clubRouter.post('/eraseclub', authguard, async (req, res) => {
         // Extraire les ID des équipes pour les retirer de la collection de l'utilisateur
         const teamIds = clubTeamCollection.map(team => team._id);
         // Mettre à jour la collection de l'utilisateur pour retirer les équipes supprimées
+        // Mettre à jour la collection de l'utilisateur pour retirer les équipes supprimées
         await userModel.updateOne(
             { _id: req.session.userId },
-            { 
-                $pullAll: { teamCollection: teamIds },
-                $pull: { clubCollection: clubId },
-                $pullAll: { memberCollection: memberIds }
-            }
-        )
+            { $pullAll: { teamCollection: teamIds } }
+        );
+        // Retirer l'ID du club de la collection de l'utilisateur
+        await userModel.updateOne(
+            { _id: req.session.userId },
+            { $pull: { clubCollection: clubId } }
+        );
+        // Retirer les ID des membres de la collection de l'utilisateur
+        await userModel.updateOne(
+            { _id: req.session.userId },
+            { $pullAll: { memberCollection: memberIds } }
+        );
         res.redirect('/dashboard');
     } catch (error) {
         res.send(error);
